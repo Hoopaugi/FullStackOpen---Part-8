@@ -1,6 +1,4 @@
-const Books = () => {
-  const books = []
-
+const Books = ({ books }) => {
   return (
     <table>
       <tbody>

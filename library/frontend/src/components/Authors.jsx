@@ -1,6 +1,4 @@
-const Authors = () => {
-  const authors = []
-
+const Authors = ({ authors }) => {
   return (
     <table>
       <tbody>
