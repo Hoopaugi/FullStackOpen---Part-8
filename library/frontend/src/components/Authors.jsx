@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Authors = ({ authors }) => {
   return (
     <table>
@@ -7,13 +9,15 @@ const Authors = ({ authors }) => {
           <th>born</th>
           <th>books</th>
         </tr>
-        {authors.map((a) => (
-          <tr key={a.name}>
-            <td>{a.name}</td>
-            <td>{a.born}</td>
-            <td>{a.bookCount}</td>
-          </tr>
-        ))}
+        {
+          authors.map((author) => (
+            <tr key={author.id}>
+              <td><Link to={`/authors/${author.id}`}>{author.name}</Link></td>
+              <td>{author.born}</td>
+              <td>{author.bookCount}</td>
+            </tr>
+          ))
+        }
       </tbody>
     </table>
   )

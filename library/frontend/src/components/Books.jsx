@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Books = ({ books }) => {
   return (
     <table>
@@ -7,13 +9,15 @@ const Books = ({ books }) => {
           <th>author</th>
           <th>published</th>
         </tr>
-        {books.map((a) => (
-          <tr key={a.title}>
-            <td>{a.title}</td>
-            <td>{a.author}</td>
-            <td>{a.published}</td>
-          </tr>
-        ))}
+        {
+          books.map((book) => (
+            <tr key={book.id}>
+              <td><Link to={`/books/${book.id}`}>{book.title}</Link></td>
+              <td>{book.author}</td>
+              <td>{book.published}</td>
+            </tr>
+          ))
+        }
       </tbody>
     </table>
   )
