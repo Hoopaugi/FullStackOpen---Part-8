@@ -15,6 +15,15 @@ const typeDefs = `
     books: [Book!]!
   }
 
+  type User {
+    username: String!
+    id: ID!
+  }
+  
+  type Token {
+    value: String!
+  }
+
   type Query {
     bookCount: Int!
     authorCount: Int!
@@ -29,6 +38,7 @@ const typeDefs = `
     findBook(
       id: String!
     ): Book
+    me: User
   }
 
   type Mutation {
@@ -42,6 +52,13 @@ const typeDefs = `
       name: String!
       born: Int!
     ): Author
+    createUser(
+      username: String!
+    ): User
+    login(
+      username: String!
+      password: String!
+    ): Token
   }
 `
 

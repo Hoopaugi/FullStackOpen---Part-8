@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
 const mongoose = require('mongoose')
@@ -8,6 +9,7 @@ const typeDefs = require('./graphql/typeDefs')
 const resolvers = require('./graphql/resolvers')
 const Book = require('./models/Book')
 const Author = require('./models/Author')
+const User = require('./models/User')
 const { authors, books } = require('./seeds')
 
 const MONGODB_URI = process.env.MONGODB_URI
@@ -28,6 +30,12 @@ const main = async () => {
     console.log('error connection to MongoDB:', error.message)
   }
   console.log('connected to MongoDB')
+
+  console.log('Seeding users')
+
+  await User.collection.drop()
+
+  await User.createCollection()
 
   console.log('Seeding authors')
 
@@ -56,7 +64,20 @@ const main = async () => {
   }
 
   try {
-    const { url } = await startStandaloneServer(server, { listen: { port: 4000 }, })
+    const { url } = await startStandaloneServer(server, {
+      listen: { port: 4000 },
+      context: async ({ req, res }) => {
+        const auth = req ? req.headers.authorization : null
+
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+
+          const currentUser = await User.findById(decodedToken.id)
+
+          return { currentUser }
+        }
+      }, 
+    })
 
     console.log(`Server ready at ${url}`)
   } catch (error) {
