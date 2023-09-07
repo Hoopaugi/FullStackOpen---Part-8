@@ -17,7 +17,11 @@ export const ALL_BOOKS = gql`
       id
       title
       published
-      author
+      author {
+        id
+        name
+        born
+      }
       genres
     }
   }
@@ -40,9 +44,9 @@ export const CREATE_BOOK = gql`
 `
 
 export const FIND_AUTHOR = gql`
-  query findAuthorbyId($id: String!) {
+  query findAuthor($findAuthorId: String!) {
     findAuthor(
-      id: $id
+      id: $findAuthorId
     ) {
       id
       name
@@ -52,19 +56,24 @@ export const FIND_AUTHOR = gql`
         id
         title
         published
+        genres
       }
     }
   }
 `
 
 export const FIND_BOOK = gql`
-  query findBookbyId($id: String!) {
+  query findBook($findBookId: String!) {
     findBook(
-      id: $id
+      id: $findBookId
     ) {
       id
       title
-      author
+      author {
+        id
+        name
+        born
+      }
       published
       genres
     }

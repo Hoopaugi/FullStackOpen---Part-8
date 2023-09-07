@@ -13,7 +13,7 @@ const Books = ({ books }) => {
           books.map((book) => (
             <tr key={book.id}>
               <td><Link to={`/books/${book.id}`}>{book.title}</Link></td>
-              <td>{book.author}</td>
+              <td><Link to={`/authors/${book.author.id}`}>{book.author.name}</Link></td>
               <td>{book.published}</td>
             </tr>
           ))

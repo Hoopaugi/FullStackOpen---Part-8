@@ -8,12 +8,12 @@ import BirthdayForm from '../components/BirthdayForm';
 const AuthorPage = () => {
   const { id } = useParams();
 
-  const result = useQuery(FIND_AUTHOR, { variables: { id } })
+  const result = useQuery(FIND_AUTHOR, { variables: { findAuthorId: id } })
 
   if (result.loading) {
     return <div>loading...</div>
   }
-
+  console.log(result)
   const author = result.data.findAuthor
 
   return (

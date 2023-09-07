@@ -8,7 +8,7 @@ import { FIND_BOOK } from '../queries';
 const BookPage = () => {
   const { id } = useParams();
 
-  const result = useQuery(FIND_BOOK, { variables: { id } })
+  const result = useQuery(FIND_BOOK, { variables: { findBookId: id } })
 
   if (result.loading) {
     return <div>loading...</div>
@@ -19,7 +19,7 @@ const BookPage = () => {
   return (
     <>
       <h2>{book.title}</h2>
-      <p>Authored by {book.author} in {book.published}</p>
+      <p>Authored by <Link to={`/authors/${book.author.id}`}>{book.author.name}</Link> in {book.published}</p>
       <ul>
         {
           book.genres.map(genre => <li key={genre}>{genre}</li>)
