@@ -23,7 +23,12 @@ const App = () => {
 
     client.resetStore()
 
-    setError('Logged out')
+    notify('Logged out')
+  }
+
+  const notify = (message) => {
+    console.log('notify:', message)
+    setError(message)
     setTimeout(() => {
       setError(null)
     }, 5000)
@@ -39,8 +44,8 @@ const App = () => {
         <Route path="/authors/:id" element={<AuthorPage />} />
         <Route path="/books" element={<BooksPage />} />
         <Route path="/books/:id" element={<BookPage />} />
-        <Route path="/login" element={<LoginPage setToken={setToken} setError={setError} />} />
-        <Route path="/add" element={<NewBookPage />} />
+        <Route path="/login" element={<LoginPage setToken={setToken} notify={notify} />} />
+        <Route path="/add" element={<NewBookPage notify={notify} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

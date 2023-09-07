@@ -54,4 +54,8 @@ const books = [
   },
 ]
 
-module.exports = { authors, books }
+const users = [
+  { username: 'root' }
+]
+
+module.exports = { authors, books, users }

@@ -1,10 +1,10 @@
 import LoginForm from '../components/LoginForm';
 
-const LoginPage = ({ setError, setToken }) => {
+const LoginPage = ({ notify, setToken }) => {
   return (
     <>
       <h2>Login</h2>
-      <LoginForm setToken={setToken} setError={setError}/>
+      <LoginForm setToken={setToken} notify={notify} />
     </>
   )
 }

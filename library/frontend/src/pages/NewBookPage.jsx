@@ -1,10 +1,10 @@
 import NewBookForm from '../components/NewBookForm'
 
-const NewBookPage = () => {
+const NewBookPage = ({ notify }) => {
   return (
     <>
       <h2>add new book</h2>
-      <NewBookForm />
+      <NewBookForm notify={notify} />
     </>
   )
 }

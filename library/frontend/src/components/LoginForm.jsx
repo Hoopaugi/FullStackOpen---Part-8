@@ -4,15 +4,19 @@ import { useNavigate } from 'react-router-dom'
 
 import { LOGIN } from '../queries'
 
-const LoginForm = ({ setError, setToken }) => {
+const LoginForm = ({ notify, setToken }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
 
   const [ login, result ] = useMutation(LOGIN, {
-    onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+    onError: async (error) => {
+      console.error('error occured:', error.graphQLErrors)
+
+      notify(error.graphQLErrors[0].message)
+
+      setPassword('')
     }
   })
 
@@ -24,10 +28,7 @@ const LoginForm = ({ setError, setToken }) => {
 
       localStorage.setItem('currentUserToken', token)
 
-      setError('Logged in')
-      setTimeout(() => {
-        setError(null)
-      }, 5000)
+      notify('Logged in')
 
       navigate('/')
     }

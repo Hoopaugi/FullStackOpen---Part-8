@@ -10,7 +10,7 @@ const resolvers = require('./graphql/resolvers')
 const Book = require('./models/Book')
 const Author = require('./models/Author')
 const User = require('./models/User')
-const { authors, books } = require('./seeds')
+const { authors, books, users } = require('./seeds')
 
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -36,6 +36,10 @@ const main = async () => {
   await User.collection.drop()
 
   await User.createCollection()
+
+  for (const user of users) {
+    await User.create({ ...user })
+  }
 
   console.log('Seeding authors')
 
