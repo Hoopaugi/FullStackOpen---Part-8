@@ -16,10 +16,10 @@ let authors = [
     name: 'Fyodor Dostoevsky',
     id: "afa5b6f1-344d-11e9-a414-719c6709cf3e",
     born: 1821
-  }, { 
+  }, {
     name: 'Joshua Kerievsky',
     id: "afa5b6f2-344d-11e9-a414-719c6709cf3e",
-  }, { 
+  }, {
     name: 'Sandi Metz',
     id: "afa5b6f3-344d-11e9-a414-719c6709cf3e",
   },
@@ -75,7 +75,8 @@ const typeDefs = `
   type Book {
     title: String!
     published: Int!
-    author: Author!
+    author: String!
+    authorId: String!
     id: ID!
     genres: [String!]!
   }
@@ -94,7 +95,7 @@ const typeDefs = `
     allBooks(
       author: String
       genre: String
-    ): [Book!]
+    ): [Book!]!
     allAuthors: [Author!]!
     findAuthor(
       id: String!
@@ -117,7 +118,6 @@ const typeDefs = `
     ): Author
   }
 `
-
 const resolvers = {
   Query: {
     bookCount: () => books.length,
@@ -151,7 +151,7 @@ const resolvers = {
         authors = authors.concat(newAuthor)
       }
 
-      const book = { ...args, author: author, id: uuid() }
+      const book = { ...args, id: uuid() }
 
       books = books.concat(book)
 

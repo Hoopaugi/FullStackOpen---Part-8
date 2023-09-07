@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { FIND_AUTHOR } from '../queries';
 import BirthdayForm from '../components/BirthdayForm';
@@ -23,7 +24,7 @@ const AuthorPage = () => {
       }
       <h3>Books</h3>
       {
-        author.books.map(book => <li key={book.id}><b>{book.title}</b> published {book.published}</li>)
+        author.books.map(book => <li key={book.id}><Link to={`/books/${book.id}`}>{book.title}</Link><span> published {book.published}</span></li>)
       }
     </>
   )
