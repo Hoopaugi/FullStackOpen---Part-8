@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const NavigationBar = () => {
+const NavigationBar = ({ token, logout }) => {
   return (
     <>
       <ul>
@@ -13,9 +13,20 @@ const NavigationBar = () => {
         <li>
           <Link to="/books">Books</Link>
         </li>
-        <li>
-          <Link to="/add">Add Book</Link>
-        </li>
+        {
+          token === null ?
+          <li>
+            <Link to="/login">Login</Link>
+          </li> :
+          <>
+            <li>
+              <Link to="/add">Add Book</Link>
+            </li>
+            <li>
+              <button onClick={logout}>Logout</button>
+            </li>
+          </>
+        }
       </ul>
     </>
   )
