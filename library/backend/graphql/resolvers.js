@@ -31,8 +31,15 @@ const resolvers = {
     findBook: async (root, args) => {
       return Book.findById(args.id).populate('author')
     },
-    me: (root, args, context) => {
+    me: async (root, args, context) => {
       return context.currentUser
+    },
+    genres: async (root, args) => {
+      const books = await Book.find({})
+
+      const genres = books.map(book => book.genres).flat()
+
+      return new Set(genres)
     }
   },
   Mutation: {
@@ -65,8 +72,9 @@ const resolvers = {
           })
         }
       }
+      const genres = args.genres.map(genre => genre.toLowerCase())
 
-      const book = new Book({ ...args, author: author })
+      const book = new Book({ ...args, genres: genres, author: author })
 
       try {
         await book.save()

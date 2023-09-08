@@ -130,3 +130,9 @@ export const ME = gql`
     }
   }
 `
+
+export const GENRES = gql`
+  query {
+    genres
+  }
+`

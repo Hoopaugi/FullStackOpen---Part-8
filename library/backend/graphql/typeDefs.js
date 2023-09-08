@@ -40,6 +40,7 @@ const typeDefs = `
       id: String!
     ): Book
     me: User
+    genres: [String!]!
   }
 
   type Mutation {
