@@ -10,6 +10,7 @@ import BooksPage from './pages/BooksPage';
 import BookPage from './pages/BookPage';
 import NewBookPage from './pages/NewBookPage';
 import LoginPage from './pages/LoginPage';
+import UserPage from './pages/UserPage';
 
 const App = () => {
   const client = useApolloClient()
@@ -40,6 +41,7 @@ const App = () => {
       <Notification message={error} />
       <Routes>
         <Route path="/" element={<AuthorsPage />} />
+        <Route path="/me" element={<UserPage token={token} />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/authors/:id" element={<AuthorPage token={token} notify={notify} />} />
         <Route path="/books" element={<BooksPage />} />

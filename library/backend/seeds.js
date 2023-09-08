@@ -55,7 +55,7 @@ const books = [
 ]
 
 const users = [
-  { username: 'root' }
+  { username: 'root', favoriteGenre: 'refactoring' }
 ]
 
 module.exports = { authors, books, users }

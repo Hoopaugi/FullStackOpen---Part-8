@@ -23,6 +23,9 @@ const NavigationBar = ({ token, logout }) => {
               <Link to="/add">Add Book</Link>
             </li>
             <li>
+              <Link to="/me">Recommended</Link>
+            </li>
+            <li>
               <button onClick={logout}>Logout</button>
             </li>
           </>
