@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FIND_AUTHOR } from '../queries';
 import BirthdayForm from '../components/BirthdayForm';
 
-const AuthorPage = () => {
+const AuthorPage = ({ token, notify }) => {
   const { id } = useParams();
 
   const result = useQuery(FIND_AUTHOR, { variables: { findAuthorId: id } })
@@ -13,14 +13,16 @@ const AuthorPage = () => {
   if (result.loading) {
     return <div>loading...</div>
   }
-  console.log(result)
+
   const author = result.data.findAuthor
 
   return (
     <>
       <h2>{author.name}</h2>
       {
-        author.born ? <p>Born {author.born}</p> : <BirthdayForm name={author.name} />
+        author.born ? <p>Born {author.born}</p> : 
+        token ? <BirthdayForm name={author.name} notify={notify} /> :
+        <p>Login to set birthday</p>
       }
       <h3>Books</h3>
       {
