@@ -136,3 +136,19 @@ export const GENRES = gql`
     genres
   }
 `
+
+export const BOOK_ADDED = gql`
+  subscription {
+    bookAdded {
+      id
+      title
+      published
+      author {
+        id
+        name
+        born
+      }
+      genres
+    }
+  }
+`
